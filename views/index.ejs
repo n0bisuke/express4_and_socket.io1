@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<head>
+    <meta charset="UTF-8">
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+</head>
+<doby>
+    <form><input></form><div></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $(function() {
+            var socket = io.connect();
+            $('form').submit(function() {
+                socket.emit('msg', $('input').val());
+                $('input').val('');
+                return false;
+            });
+
+            socket.on('msg', function(data) {
+                console.log(data);
+                $('div').prepend(data + '<br>');
+
+            });
+        });
+    </script>
+</doby>
